@@ -19,8 +19,6 @@ You can check out the demo by clicking [here]([https://your-demo-link.com](https
 
 ![Product Listing Screenshot](https://i.imgur.com/o6jq6PN.jpeg)
 
-_Add screenshots to showcase the pages and functionality._
-
 ## Technologies Used
 
 - **HTML**

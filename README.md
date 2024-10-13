@@ -17,7 +17,8 @@ The goal was to combine fun and learning, helping to spark interest in technolog
 
 You can check out the demo by clicking [here]([https://your-demo-link.com](https://teixeira308.github.io/supermarket-play/)) (replace with actual link if using GitHub Pages or another service).
 
-([https://i.imgur.com/o6jq6PN.jpeg))  
+![Product Listing Screenshot](https://i.imgur.com/o6jq6PN.jpeg)
+
 _Add screenshots to showcase the pages and functionality._
 
 ## Technologies Used

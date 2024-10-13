@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermercado</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playwrite+CU:wght@400;700&display=swap">
+ 
+    
+           <style>
+		body{
+			background-color:#0056b3;
+			
+
+		}
+		/* Estilo geral para o menu */
+.nav-link {
+    color: white; /* Cor da fonte padrão */
+    font-weight: bold; /* Fonte em negrito para melhor destaque */
+}
+
+/* Estilo para o link ao ser passado o mouse (hover) */
+.nav-link:hover {
+    color: #0056b3; /* Cor da fonte ao passar o mouse */
+    background-color: white; /* Cor de fundo ao passar o mouse */
+    text-decoration: none; /* Remove sublinhado */
+	border-radius: 8px;
+}
+
+ 
+
+/* Opcional: adicionar um efeito de transição suave ao hover */
+.nav-link {
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+	background-color:#0056b3;
+}
+
+.form-container {
+background-color:#0056b3;
+    width: 100%;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Playwrite CU', sans-serif; /* 'Playwrite CU' é a fonte especificada */
+    text-align: center;
+}
+
+.buttons-container {
+    display: flex;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.items-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Espaça os itens ao longo do eixo principal */
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    align-items: flex-start; /* Alinha os itens ao topo */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.item-list-container {
+    width: 100%;
+    text-align: center;
+    align-self: center;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.text-white {
+    color: black;
+}
+
+.button-add {
+    text-align: left;
+    padding: 10px;
+}
+.modal-dialog {
+    max-width: 90%; /* Ajuste conforme necessário */
+    margin: 30px auto;
+}
+
+/* Ajusta a altura mínima do corpo do modal para acomodar o conteúdo */
+.modal-body {
+    max-height: 60vh; /* Ajuste conforme necessário */
+    overflow-y: auto; /* Adiciona uma barra de rolagem se necessário */
+}
+
+/* Ajusta a lista de produtos para preencher o modal corretamente */
+#ListProductList {
+	width:100%;
+    max-height: 300px; /* Ajuste conforme necessário */
+    overflow-y: auto; /* Adiciona uma barra de rolagem se necessário */
+}
+#ListProductList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#ListProductList li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+    </style>
+</head>
+<body>
+
+    <div class="container">
+	 <div class="form-container">
+            <h1 class="mb-4">Supermercado</h1>
+        </div>
+		<div class="row"><br></div>
+        <div class="row">
+            <!-- Menu -->
+            <nav class="col-md-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-target="produtos">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-target="compra">Compra</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Conteúdo -->
+            <main class="col-md-9 content" id="content">
+                <!-- O conteúdo será carregado aqui -->
+                <div id="produtos" class="page-content" style="display: block;">
+                   <h2 class="text-white">Lista de produtos  <button class="btn btn-light" data-toggle="modal" data-target="#newProductModal">+</button> </h2>
+        <div class="buttons-container">
+           
+						
+			<ul id="ListProductList" class="list-group">
+                            <!-- A lista de produtos será preenchida dinamicamente -->
+                        </ul>
+		</div>
+		  
+                </div>
+                <div id="compra" class="page-content" style="display: none;">
+                     <h2 class="text-white">Nova compra  <button class="btn btn-light" data-toggle="modal" data-target="#addProductModal">+</button></h2>
+        <div class="items-container">
+            <div class="item-list-container">
+                
+                <div class="button-add">
+                    
+                </div> 
+                <table id="ordersTable" class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Produto</th>
+                            <th>Preço por unidade</th>
+                            <th>Quantidade</th>
+                            <th>Preço total</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+			
+            <div class="item-list-container">
+               
+                <table id="ordersTable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Total</th>
+                            <th>R$<span id="total">0.00</span></th>
+                        </tr>
+                        <tr>
+                            <th>Taxa de Entrega</th>
+                            <th>R$<span id="deliveryFee">10.00</span></th>
+                        </tr>
+                        <tr>
+                            <th>Total Final</th>
+                            <th>R$<span id="finalTotal">10.00</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <button class="btn btn-success" id="clearAllButton" data-toggle="modal" data-target="#paymentModal" onclick="initializePaymentModal()">Pagar pedido</button>
+            </div>
+        </div>
+                </div>
+                
+            </main>
+        </div>
+    </div>
+
+
+ <!-- Modal -->
+    <div class="modal fade" id="newProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addProductModalLabel">Adicionar Novo Produto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addProductForm">
+                        <div class="form-group">
+                            <label for="newProductName">Nome do Produto</label>
+                            <input type="text" class="form-control" id="newProductName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productPrice">Preço</label>
+                            <input type="text" class="form-control" id="newProductPrice" step="0.01" value="0,00" required>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="newProduct()">Salvar</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal para adicionar produto -->
+    <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addProductModalLabel">Adicionar Produto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="orderForm">
+                        <div class="form-group">
+                            <label for="product">Produto:</label>
+                            <select id="productList" class="form-control">
+							 
+								<!-- A lista de produtos será preenchida dinamicamente -->
+							</select>
+                        </div>
+                        <div class="form-group">
+                            <label for="qtde">Quantidade:</label>
+                            <input type="number" id="qtde" class="form-control" step="1" value="1" required>
+                        </div>
+							<div class="form-group">
+                           
+                            <input type="hidden" id="price" class="form-control" step="1.0" value="0.00" required>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="addProduct()">Adicionar Produto</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+<div class="modal fade" id="listProductModal" tabindex="-1" role="dialog" aria-labelledby="listProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="listProductModalLabel">Lista de Produtos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="orderForm">
+                    <div class="form-group">
+                       
+                        <ul id="ListProductList" class="list-group">
+                            <!-- A lista de produtos será preenchida dinamicamente -->
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+	
+	<!-- Modal para pagamento -->
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Pagamento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="paymentForm">
+					 <div class="form-group">
+                        <label for="moneyPaid">Dinheiro Pago:</label>
+                        <input type="text" id="moneyPaid" class="form-control" readonly>
+                    </div>
+						<div class="form-group">
+                        <label for="totalToPay">Total a Pagar:</label>
+                        <input type="text" id="totalToPay" class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="change">Valor do Troco:</label>
+                        <input type="text" id="change" class="form-control" step="0.01" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" onclick="processPayment()">Confirmar Pagamento</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        // Função para mostrar o conteúdo baseado na seleção do menu
+        function showContent(targetId) {
+            // Ocultar todos os conteúdos
+            document.querySelectorAll('.page-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            // Mostrar o conteúdo selecionado
+            document.getElementById(targetId).style.display = 'block';
+        }
+
+        // Adicionar evento de clique aos links do menu
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('data-target');
+                showContent(targetId);
+            });
+        });
+		
+		 const deliveryFee = 10.00;
+        let total = 0;
+
+        function addProduct() {
+            const qtde = document.getElementById('qtde').value;
+            const product = document.getElementById('productList').value;
+            const unitprice = parseFloat(document.getElementById('price').value);
+            const price = unitprice * qtde;
+
+            // Validar entradas
+            if (!qtde || !product || isNaN(price) || price <= 0) {
+                alert('Por favor, preencha todos os campos corretamente.');
+                return;
+            }
+
+            // Adicionar produto à tabela
+            const table = document.getElementById('ordersTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+
+            newRow.innerHTML = `
+                <td>${product}</td>
+                <td>R$${unitprice.toFixed(2)}</td>
+                <td>${qtde}</td>
+                <td>R$${price.toFixed(2)}</td>
+                <td><button class="btn btn-danger btn-sm" onclick="markAsPaid(this)">Deletar Produto</button></td>
+            `;
+
+            // Atualizar o total e o total final
+            total += price;
+            updateTotals();
+
+            // Limpar formulário e fechar o modal
+            document.getElementById('orderForm').reset();
+            $('#addProductModal').modal('hide');
+        }
+
+        function markAsPaid(button) {
+            const row = button.closest('tr');
+            const price = parseFloat(row.cells[3].innerText.replace('R$', ''));
+            row.remove();
+            // Atualizar o total após a remoção
+            total -= price;
+            updateTotals();
+        }
+
+        function updateTotals() {
+            document.getElementById('total').innerText = total.toFixed(2);
+            document.getElementById('finalTotal').innerText = (total + deliveryFee).toFixed(2);
+        }
+
+        function clearAll() {
+            // Selecionar a tabela e o corpo da tabela
+            const tableBody = document.getElementById('ordersTable').getElementsByTagName('tbody')[0];
+            
+            // Remover todas as linhas da tabela
+            tableBody.innerHTML = '';
+
+            // Resetar o total
+            total = 0;
+            
+            // Atualizar os totais
+            updateTotals();
+
+            // Limpar o formulário
+            document.getElementById('orderForm').reset();
+        }
+		
+		function initializePaymentModal() {
+			const totalFinal = total + deliveryFee;
+			const totalToPayField = document.getElementById('totalToPay');
+			const moneyPaidField = document.getElementById('moneyPaid');
+			
+			// Atualiza o campo total a pagar
+			totalToPayField.value = `R$ ${totalFinal.toFixed(2)}`;
+			
+			let randomAmount;
+			do {
+				randomAmount = (Math.random() * (200 - 10) + 10).toFixed(2); // valor aleatório entre 10 e 200
+			} while (parseFloat(randomAmount) < totalFinal);
+			
+			// Atualiza os campos do modal
+			totalToPayField.value = `R$ ${totalFinal.toFixed(2)}`;
+			moneyPaidField.value = `R$ ${randomAmount}`;
+		}
+
+
+		function processPayment() {
+			const totalFinal = total + deliveryFee;
+			const moneyPaid = parseFloat(document.getElementById('moneyPaid').value.replace('R$ ', ''));
+			const change = parseFloat(document.getElementById('change').value.replace(',', '.'));
+			
+			if (isNaN(change) || change < 0) {
+				alert('Por favor, insira um valor de troco válido.');
+				return;
+			}
+		
+			if (change !== (moneyPaid - totalFinal)) {
+				alert('O valor do troco está incorreto. Verifique o valor digitado.');
+				return;
+			}
+		
+			alert('Pagamento processado com sucesso!');
+			// Fechar o modal e limpar a tabela
+			$('#paymentModal').modal('hide');
+			clearAll();
+		}
+
+	function saveProducts(products) {
+            localStorage.setItem('products', JSON.stringify(products));
+    }
+
+		function deleteProduct(index) {
+			// Obter produtos do localStorage
+			const products = JSON.parse(localStorage.getItem('products')) || [];
+			
+			// Remover o produto da lista
+			products.splice(index, 1);
+			
+			// Salvar produtos no localStorage
+			saveProducts(products);
+			
+			// Atualizar a lista de produtos na página
+			loadProducts();
+		}
+
+   function loadProducts() {
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+    const listProductList = document.getElementById('ListProductList');
+    const productList = document.getElementById('productList');
+    productList.innerHTML = ''; // Limpar a lista atual
+    listProductList.innerHTML = ''; // Limpar a lista atual
+
+    products.forEach((product, index) => {
+        // Adicionar ao dropdown
+        const option = document.createElement('option');
+        option.value = product.name;
+        option.dataset.price = product.price; // Armazenar o preço no atributo data-price
+        option.textContent = `${product.name} - R$${product.price.toFixed(2)}`;
+        productList.appendChild(option);
+
+        // Adicionar à lista no modal
+        const listItem = document.createElement('li');
+        listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+        listItem.textContent = `${product.name} - R$${product.price.toFixed(2)}`;
+
+        // Botão de exclusão
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'btn btn-danger btn-sm';
+        deleteButton.textContent = 'Excluir';
+        deleteButton.onclick = () => deleteProduct(index);
+
+        listItem.appendChild(deleteButton);
+        listProductList.appendChild(listItem);
+    });
+
+    // Adicionar valor vazio
+    const option = document.createElement('option');
+    option.value = "";
+    option.dataset.price = ""; // Armazenar o preço no atributo data-price
+    option.textContent = " ";
+    option.selected = true;
+    productList.appendChild(option);
+
+    // Adicionar event listener ao selecionar um produto
+    productList.addEventListener('change', function () {
+        const selectedOption = productList.options[productList.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price);
+        document.getElementById('price').value = price.toFixed(2); // Atualizar o input oculto com o preço
+    });
+}
+
+
+	// Função para adicionar um produto
+	function newProduct() {
+		const name = document.getElementById('newProductName').value.replace(',', '.');
+		const price = parseFloat(document.getElementById('newProductPrice').value.replace(',', '.'));
+		 
+		if (!name || isNaN(price) || price <= 0) {
+			alert('Por favor, preencha todos os campos corretamente.');
+			return;
+		}
+	
+		const product = {
+			name: name,
+			price: price
+		};
+	
+		// Obter produtos do localStorage
+		const products = JSON.parse(localStorage.getItem('products')) || [];
+		products.push(product);
+	
+		// Salvar produtos no localStorage
+		saveProducts(products);
+	
+		// Atualizar a lista de produtos na página
+		loadProducts();
+	
+		// Limpar o formulário e fechar o modal
+		document.getElementById('addProductForm').reset();
+		$('#addProductModal').modal('hide');
+	}
+
+
+        // Carregar produtos ao carregar a página
+        window.onload = loadProducts;
+		
+		//Mascara de preço
+		document.getElementById('newProductPrice').addEventListener('input', function (e) {
+		let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é número
+		value = (value / 100).toFixed(2); // Divide por 100 e fixa duas casas decimais
+		value = value.replace('.', ','); // Substitui ponto por vírgula
+		value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Adiciona ponto como separador de milhar
+		e.target.value = `${value}`; // Adiciona a mascara
+		});
+
+		document.getElementById('change').addEventListener('input', function (e) {
+		let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é número
+		value = (value / 100).toFixed(2); // Divide por 100 e fixa duas casas decimais
+		value = value.replace('.', ','); // Substitui ponto por vírgula
+		value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Adiciona ponto como separador de milhar
+		e.target.value = `${value}`; // Adiciona a mascara
+		});
+    </script>
+</body>
+</html>

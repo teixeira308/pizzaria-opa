@@ -7,120 +7,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playwrite+CU:wght@400;700&display=swap">
- 
+    <link rel="stylesheet" href="style.css">
     
-           <style>
-		body{
-			background-color:#0056b3;
-			
-
-		}
-		/* Estilo geral para o menu */
-.nav-link {
-    color: white; /* Cor da fonte padrão */
-    font-weight: bold; /* Fonte em negrito para melhor destaque */
-}
-
-/* Estilo para o link ao ser passado o mouse (hover) */
-.nav-link:hover {
-    color: #0056b3; /* Cor da fonte ao passar o mouse */
-    background-color: white; /* Cor de fundo ao passar o mouse */
-    text-decoration: none; /* Remove sublinhado */
-	border-radius: 8px;
-}
-
- 
-
-/* Opcional: adicionar um efeito de transição suave ao hover */
-.nav-link {
-    transition: color 0.3s, background-color 0.3s;
-}
-
-.container {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-	background-color:#0056b3;
-}
-
-.form-container {
-background-color:#0056b3;
-    width: 100%;
-    background: #fff;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    font-family: 'Playwrite CU', sans-serif; /* 'Playwrite CU' é a fonte especificada */
-    text-align: center;
-}
-
-.buttons-container {
-    display: flex;
-    background: #fff;
-    padding: 10px;
-    border-radius: 8px;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.items-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; /* Espaça os itens ao longo do eixo principal */
-    background: #fff;
-    padding: 10px;
-    border-radius: 8px;
-    align-items: flex-start; /* Alinha os itens ao topo */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.item-list-container {
-    width: 100%;
-    text-align: center;
-    align-self: center;
-    background: #fff;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.text-white {
-    color: black;
-}
-
-.button-add {
-    text-align: left;
-    padding: 10px;
-}
-.modal-dialog {
-    max-width: 90%; /* Ajuste conforme necessário */
-    margin: 30px auto;
-}
-
-/* Ajusta a altura mínima do corpo do modal para acomodar o conteúdo */
-.modal-body {
-    max-height: 60vh; /* Ajuste conforme necessário */
-    overflow-y: auto; /* Adiciona uma barra de rolagem se necessário */
-}
-
-/* Ajusta a lista de produtos para preencher o modal corretamente */
-#ListProductList {
-	width:100%;
-    max-height: 300px; /* Ajuste conforme necessário */
-    overflow-y: auto; /* Adiciona uma barra de rolagem se necessário */
-}
-#ListProductList {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-#ListProductList li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-    </style>
+          
 </head>
 <body>
 
@@ -161,9 +50,9 @@ background-color:#0056b3;
         <div class="items-container">
             <div class="item-list-container">
                 
-                <div class="button-add">
+                
                     
-                </div> 
+                <div class="table-responsive">
                 <table id="ordersTable" class="table table-bordered">
                     <thead class="thead-light">
                         <tr>
@@ -177,6 +66,7 @@ background-color:#0056b3;
                     <tbody>
                     </tbody>
                 </table>
+           
            
                 <table id="ordersTable" class="table table-bordered">
                     <thead>
@@ -196,6 +86,7 @@ background-color:#0056b3;
                     <tbody>
                     </tbody>
                 </table>
+                </div>
                 <button class="btn btn-success" id="clearAllButton" data-toggle="modal" data-target="#paymentModal" onclick="initializePaymentModal()">Pagar pedido</button>
             </div>
         </div>

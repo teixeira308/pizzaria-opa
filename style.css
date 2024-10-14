@@ -1,0 +1,134 @@
+
+body{
+    background-color:#0056b3;
+    
+
+}
+/* Estilo geral para o menu */
+.nav-link {
+color: white; /* Cor da fonte padrão */
+font-weight: bold; /* Fonte em negrito para melhor destaque */
+}
+
+/* Estilo para o link ao ser passado o mouse (hover) */
+.nav-link:hover {
+color: #0056b3; /* Cor da fonte ao passar o mouse */
+background-color: white; /* Cor de fundo ao passar o mouse */
+text-decoration: none; /* Remove sublinhado */
+border-radius: 8px;
+}
+
+
+
+/* Opcional: adicionar um efeito de transição suave ao hover */
+.nav-link {
+transition: color 0.3s, background-color 0.3s;
+}
+
+.container {
+margin-top: 20px;
+display: flex;
+flex-direction: column;
+background-color:#0056b3;
+}
+
+.form-container {
+background-color:#0056b3;
+width: 100%;
+background: #fff;
+padding: 10px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+font-family: 'Playwrite CU', sans-serif; /* 'Playwrite CU' é a fonte especificada */
+text-align: center;
+}
+
+.buttons-container {
+display: flex;
+background: #fff;
+padding: 10px;
+border-radius: 8px;
+justify-content: center; /* Centraliza horizontalmente */
+align-items: center;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.items-container {
+display: flex;
+flex-direction: row;
+justify-content: space-between; /* Espaça os itens ao longo do eixo principal */
+background: #fff;
+padding: 10px;
+border-radius: 8px;
+align-items: flex-start; /* Alinha os itens ao topo */
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.item-list-container {
+width: 100%;
+text-align: center;
+align-self: center;
+background: #fff;
+padding: 10px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.text-white {
+color: black;
+}
+
+.button-add {
+text-align: left;
+padding: 10px;
+}
+.modal-dialog {
+max-width: 90%; /* Ajuste conforme necessário */
+margin: 30px auto;
+}
+
+/* Ajusta a altura mínima do corpo do modal para acomodar o conteúdo */
+.modal-body {
+max-height: 60vh; /* Ajuste conforme necessário */
+overflow-y: auto; /* Adiciona uma barra de rolagem se necessário */
+}
+
+/* Ajusta a lista de produtos para preencher o modal corretamente */
+#ListProductList {
+width:100%;
+max-height: 300px; /* Ajuste conforme necessário */
+overflow-y: auto; /* Adiciona uma barra de rolagem se necessário */
+}
+#ListProductList {
+list-style-type: none;
+padding: 0;
+margin: 0;
+}
+
+#ListProductList li {
+padding: 10px;
+border-bottom: 1px solid #ddd;
+}
+/* Definir um estilo base para a tabela */
+.table {
+    font-size: 1rem; /* Tamanho base da fonte para telas maiores */
+}
+
+/* Reduzir o tamanho da fonte para dispositivos móveis */
+@media (max-width: 768px) {
+    .table {
+        font-size: 0.875rem; /* Tamanho menor para tablets e celulares */
+    }
+}
+
+@media (max-width: 576px) {
+    .table {
+        font-size: 0.75rem; /* Tamanho ainda menor para celulares menores */
+    }
+}
+
+@media (max-width: 400px) {
+    .table {
+        font-size: 0.65rem; /* Ajuste para dispositivos muito pequenos */
+    }
+}

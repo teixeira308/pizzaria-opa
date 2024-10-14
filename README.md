@@ -15,7 +15,7 @@ The goal was to combine fun and learning, helping to spark interest in technolog
 
 ## Demo
 
-You can check out the demo by clicking [here]([https://your-demo-link.com](https://teixeira308.github.io/supermarket-play/)) (replace with actual link if using GitHub Pages or another service).
+You can check out the demo by clicking [here]([https://your-demo-link.com](https://teixeira308.github.io/supermarket-play/)).
 
 ![Product Listing Screenshot](https://i.imgur.com/o6jq6PN.jpeg)
 
